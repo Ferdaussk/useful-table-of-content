@@ -1,0 +1,22 @@
+.utofc-effective-icon::after {
+    content: 'bwd' !important;
+    position: absolute !important;
+    right: 7px;
+    top: 7px;
+    color: #fffefe;
+    font-family: initial;
+    background: linear-gradient(90deg, #03a9f4, #f441a5);
+    border-radius: 3px;
+    font-size: 11px;
+    padding: 2px 5px;
+}
+#elementor-panel-category-bwdthebest_general_category .elementor-panel-category-title {
+    background: linear-gradient(90deg, #f441a5, #03a9f4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+#elementor-panel-category-bwdthebest_general_category .elementor-panel-category-title:before{
+    -webkit-text-fill-color: #7a7a7a;
+}
+  
