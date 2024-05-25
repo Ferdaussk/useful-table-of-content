@@ -50,6 +50,13 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		);
 		$this->end_controls_section();
 
+
+
+
+
+
+
+
 		$this->start_controls_section(
 			'section_contents_fields',
 			array(
@@ -784,7 +791,108 @@ class UTOFC_Effective_widgets extends Widget_Base {
 	 */
 	protected function render() {
 
-	$settings = $this->get_settings_for_display();
-	// 
+		$settings = $this->get_settings_for_display();
+
+		$head_data   = $settings['heading_select'];
+		$hideshow    = $settings['collapsible'];
+		$displayicon = '';
+
+		$head_data = implode( ',', $head_data );
+
+		$this->add_inline_editing_attributes( 'heading_title', 'basic' );
+
+		$this->add_render_attribute(
+			'parent-wrapper',
+			array(
+				'class'         => 'uael-toc-main-wrapper',
+				'data-headings' => $head_data,
+			)
+		);
+		$scroll_time_size          = isset( $settings['scroll_time']['size'] ) ? $settings['scroll_time']['size'] : '';
+		$scroll_offset_mobile_size = isset( $settings['scroll_offset_mobile']['size'] ) ? $settings['scroll_offset_mobile']['size'] : '';
+		$scroll_offset_tablet_size = isset( $settings['scroll_offset_tablet']['size'] ) ? $settings['scroll_offset_tablet']['size'] : '';
+		$scroll_offset_size        = isset( $settings['scroll_offset']['size'] ) ? $settings['scroll_offset']['size'] : '';
+
+		$this->add_render_attribute( 'list-parent-wrapper', 'data-scroll', $scroll_time_size );
+
+		if ( '' !== $scroll_offset_mobile_size ) {
+			$this->add_render_attribute( 'list-parent-wrapper', 'data-scroll-offset-mobile', $scroll_offset_mobile_size );
+		}
+
+		if ( '' !== $scroll_offset_tablet_size ) {
+			$this->add_render_attribute( 'list-parent-wrapper', 'data-scroll-offset-tablet', $scroll_offset_tablet_size );
+		}
+
+		if ( '' !== $scroll_offset_size ) {
+			$this->add_render_attribute( 'list-parent-wrapper', 'data-scroll-offset', $scroll_offset_size );
+		}
+
+		$scroll_to_top_offset_size   = isset( $settings['scroll_to_top_offset']['size'] ) ? $settings['scroll_to_top_offset']['size'] : '';
+		$scroll_to_top_offset_mobile = isset( $settings['scroll_to_top_offset_mobile']['size'] ) ? $settings['scroll_to_top_offset_mobile']['size'] : '';
+		$scroll_to_top_offset_tablet = isset( $settings['scroll_to_top_offset_tablet']['size'] ) ? $settings['scroll_to_top_offset_tablet']['size'] : '';
+
+		if ( '' !== $scroll_to_top_offset_mobile ) {
+			$this->add_render_attribute( 'list-parent-wrapper', 'data-scroll-to-top-offset-mobile', $scroll_to_top_offset_mobile );
+		}
+
+		if ( '' !== $scroll_to_top_offset_tablet ) {
+			$this->add_render_attribute( 'list-parent-wrapper', 'data-scroll-to-top-offset-tablet', $scroll_to_top_offset_tablet );
+		}
+
+		if ( '' !== $scroll_to_top_offset_size ) {
+			$this->add_render_attribute( 'list-parent-wrapper', 'data-scroll-to-top-offset', $scroll_to_top_offset_size );
+		}
+
+		$this->add_render_attribute( 'hide-show-wrapper', 'data-hideshow', $hideshow );
+
+		if ( 'yes' === $settings['collapsible'] ) {
+			$this->add_render_attribute( 'hide-show-wrapper', 'data-is-collapsible', 'yes' );
+
+			if ( 'yes' === $settings['auto_collapsible'] ) {
+				$this->add_render_attribute( 'parent-wrapper', 'class', 'uael-toc-auto-collapse' );
+			} else {
+				$this->add_render_attribute( 'parent-wrapper', 'class', 'content-show' );
+			}
+		}
+		?>
+		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'parent-wrapper' ) ); ?> >
+			<div class="uael-toc-wrapper">
+				<div class="uael-toc-header">
+					<span class="uael-toc-heading elementor-inline-editing" data-elementor-setting-key="heading_title" data-elementor-inline-editing-toolbar="basic" ><?php echo wp_kses_post( $this->get_settings_for_display( 'heading_title' ) ); ?></span>
+					<?php if ( 'yes' === $settings['collapsible'] ) { ?>
+						<div class="uael-toc-switch" <?php echo wp_kses_post( $this->get_render_attribute_string( 'hide-show-wrapper' ) ); ?>>
+							<span class="uael-icon fa"></span>
+						</div>
+					<?php } ?>
+				</div>
+				<?php $this->render_separator( $settings ); ?>
+				<div class="uael-toc-toggle-content">
+					<div class="uael-toc-content-wrapper">
+						<?php
+						if ( 'unordered_list' === $settings['bullet_icon'] ) {
+							?>
+
+							<ul data-toc-headings="headings" class="uael-toc-list uael-toc-list-disc" <?php echo wp_kses_post( $this->get_render_attribute_string( 'list-parent-wrapper' ) ); ?> ></ul>
+						<?php } elseif ( 'ordered_list' === $settings['bullet_icon'] ) { ?>
+
+							<ol data-toc-headings="headings" class="uael-toc-list" <?php echo wp_kses_post( $this->get_render_attribute_string( 'list-parent-wrapper' ) ); ?> ></ol>
+
+						<?php } else { ?>
+
+							<ul data-toc-headings="headings" class="uael-toc-list uael-toc-list-none" <?php echo wp_kses_post( $this->get_render_attribute_string( 'list-parent-wrapper' ) ); ?> ></ul>
+						<?php } ?>
+					</div>
+				</div>
+				<div class="uael-toc-empty-note">
+					<span><?php echo esc_attr__( 'Add a header to begin generating the table of contents', 'uael' ); ?></span>
+				</div>
+			</div>
+			<?php if ( 'yes' === $settings['scroll_to_top'] ) { ?>
+				<a id="uael-scroll-top" class="uael-scroll-top-icon">
+					<span class="screen-reader-text">Scroll to Top</span>
+				</a>
+			<?php } ?>
+		</div>
+		<?php
 	}
 }

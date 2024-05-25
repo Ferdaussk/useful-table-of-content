@@ -107,8 +107,8 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		[
 			'label' => esc_html__( 'Content', 'useful-table-of-content' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__( 'Yes', 'useful-table-of-content' ),
-			'label_off' => esc_html__( 'No', 'useful-table-of-content' ),
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
 			'default' => 'yes',				
 		]
 	);
@@ -143,8 +143,8 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		[
 			'label' => esc_html__( 'Icon', 'useful-table-of-content' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__( 'Yes', 'useful-table-of-content' ),
-			'label_off' => esc_html__( 'No', 'useful-table-of-content' ),
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
 			'default' => 'no',
 			'separator' => 'before',
 			'condition' => [
@@ -172,7 +172,7 @@ class UTOFC_Effective_widgets extends Widget_Base {
 	$this->start_controls_section(
 		'table_extra_option_section',
 		[
-			'label' => esc_html__( 'Extra Settings', 'useful-table-of-content' ),
+			'label' => esc_html__( 'Extra Options', 'useful-table-of-content' ),
 			'tab' => Controls_Manager::TAB_CONTENT,
 		]
 	);
@@ -181,9 +181,10 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		[
 			'label' => esc_html__( 'Toggle', 'useful-table-of-content' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__( 'Yes', 'useful-table-of-content' ),
-			'label_off' => esc_html__( 'No', 'useful-table-of-content' ),
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
 			'default' => 'no',
+			'separator' => 'before',
 			'condition' => [
 				'showText' => 'yes',
 			],	
@@ -194,8 +195,8 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		[
 			'label' => esc_html__( 'Default On', 'useful-table-of-content' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__( 'Yes', 'useful-table-of-content' ),
-			'label_off' => esc_html__( 'No', 'useful-table-of-content' ),
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
 			'default' => 'yes',
 			'condition' => [
 				'showText' => 'yes',
@@ -262,9 +263,10 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		[
 			'label' => esc_html__( 'Smooth Scroll', 'useful-table-of-content' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__( 'Yes', 'useful-table-of-content' ),
-			'label_off' => esc_html__( 'No', 'useful-table-of-content' ),
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
 			'default' => 'no',
+			'separator' => 'before',
 		]
 	);
 	$this->add_responsive_control(
@@ -318,15 +320,16 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		[
 			'label' => esc_html__( 'Fixed', 'useful-table-of-content' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__( 'Yes', 'useful-table-of-content' ),
-			'label_off' => esc_html__( 'No', 'useful-table-of-content' ),
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
 			'default' => 'no',
+			'separator' => 'before',
 		]
 	);
 	$this->add_responsive_control(
-		'fixedOffset',
-		[
-			'type' => Controls_Manager::SLIDER,
+					'fixedOffset',
+					[
+							'type' => Controls_Manager::SLIDER,
 			'label' => esc_html__('Fixed Offset', 'useful-table-of-content'),
 			'size_units' => [ 'px' ],
 			'range' => [
@@ -344,19 +347,98 @@ class UTOFC_Effective_widgets extends Widget_Base {
 			'condition' => [
 				'fixedPosition' => 'yes',
 			],
+					]
+			);
+	$this->add_control(
+					'hashtag',
+					[
+			'label' => esc_html__( 'Hash Tag', 'useful-table-of-content' ),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
+			'default' => 'no',
+			'separator' => 'before',
 		]
-	);
+			);
+	$this->add_control(
+		'hashtagtext',
+		[
+			'label' => esc_html__( 'Tag', 'useful-table-of-content' ),
+			'type' => Controls_Manager::TEXT,
+			'default' => '#',
+			'dynamic' => [
+				'active' => true,
+			],
+			'label_block' => true,
+			'condition' => [
+				'hashtag' => 'yes',
+			],	
+		]
+	);		
+	$this->add_control(
+					'hashtaghover',
+					[
+			'label' => esc_html__( 'Hash Tag On Hover', 'useful-table-of-content' ),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
+			'default' => 'yes',
+			'condition' => [
+				'hashtag' => 'yes',
+			],	
+		]
+			);
+	$this->add_responsive_control(
+					'headingsOffset',
+					[
+							'type' => Controls_Manager::SLIDER,
+			'label' => esc_html__('Heading Active Offset ', 'useful-table-of-content'),
+			'size_units' => [ 'px' ],
+			'range' => [
+				'px' => [
+					'min' => 0,
+					'max' => 500,
+					'step' => 1,
+				],
+			],
+			'description' => esc_html__( 'Note : Value to make Heading of TOC active by reaching to It\'s page location.', 'useful-table-of-content' ),
+			'default' => [
+				'unit' => 'px',
+				'size' => 1,
+			],
+			'separator' => 'before',
+			'render_type' => 'ui',
+					]
+			);
 	$this->add_control(
 		'contentSelector',
 		[
-			'label' => esc_html__( 'Exclude', 'useful-table-of-content' ),
+			'label' => esc_html__( 'Restricted Container Area', 'useful-table-of-content' ),
 			'type' => Controls_Manager::TEXT,
 			'default' => '',
 			'dynamic' => [
 				'active' => true,
 			],
-			'description' => esc_html__( 'Add a class which content you want to exclude from here.', 'useful-table-of-content' ),
+			'description' => esc_html__( 'Note : You can add class name of container to restrict TOC rendering. ', 'useful-table-of-content' ),
 			'label_block' => true,
+			'separator' => 'before',
+		]
+	);
+	$this->add_control(
+		'excludecontentSelector',
+		[				
+			'type' => \Elementor\Controls_Manager::RAW_HTML,
+			'raw' => esc_html__( 'How to exclude any title?', 'useful-table-of-content' ),
+			'content_classes' => 'utofc-widget-description-toc',
+			'separator' => 'before',
+		]
+	);
+	$this->add_control(
+		'excludecontentSelector1',
+		[				
+			'type' => \Elementor\Controls_Manager::RAW_HTML,
+			'raw' => esc_html__( 'Use class ".utofc-toc-ignore" in heading to exclude that heading from TOC.', 'useful-table-of-content' ),
+			'content_classes' => 'utofc-widget-description',
 		]
 	);
 	$this->end_controls_section();
@@ -980,8 +1062,8 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		[
 			'label' => esc_html__( 'Height', 'useful-table-of-content' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__( 'Yes', 'useful-table-of-content' ),
-			'label_off' => esc_html__( 'No', 'useful-table-of-content' ),
+			'label_on' => esc_html__( 'Enable', 'useful-table-of-content' ),
+			'label_off' => esc_html__( 'Disable', 'useful-table-of-content' ),
 			'default' => 'yes',
 			'separator' => 'before',
 		]
@@ -1301,16 +1383,101 @@ class UTOFC_Effective_widgets extends Widget_Base {
 	);
 	$this->end_controls_tab();
 	$this->end_controls_tabs();		
-	$this->end_controls_section();
-	
-	$this->start_controls_section(
-		'table_content_boxbg_styling',
+			$this->end_controls_section();
+			
+			$this->start_controls_section(
+					'table_hashtag_styling',
+					[
+							'label' => esc_html__('Hash Tag', 'useful-table-of-content'),
+							'tab' => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				'hashtag' => 'yes',
+			],
+					]
+			);
+	 $this->add_group_control(
+		Group_Control_Typography::get_type(),
 		[
-			'label' => esc_html__('Box', 'useful-table-of-content'),
-			'tab' => Controls_Manager::TAB_STYLE,
+			'name' => 'hashTypo',
+							'label' => esc_html__('Typography', 'useful-table-of-content'),
+			'scheme' => Typography::TYPOGRAPHY_3,
+			'selector' => '.utofc-toc-hash-tag',
 		]
 	);
-	$this->add_responsive_control(
+			$this->start_controls_tabs( 'table_hash' );
+	$this->start_controls_tab(
+		'hashn',
+		[
+			'label' => esc_html__( 'Normal', 'useful-table-of-content' ),
+		]
+	);
+	$this->add_control(
+		'hashcolor',
+		[
+			'label' => esc_html__( 'Color', 'useful-table-of-content' ),
+			'type' => Controls_Manager::COLOR,
+			'selectors' => [
+				'.utofc-toc-hash-tag' => 'color: {{VALUE}} !important;',
+			],
+		]
+	);
+	$this->end_controls_tab();
+	$this->start_controls_tab(
+		'hashh',
+		[
+			'label' => esc_html__( 'Hover', 'useful-table-of-content' ),
+		]
+	);
+	$this->add_control(
+		'hashcolorh',
+		[
+			'label' => esc_html__( 'Color', 'useful-table-of-content' ),
+			'type' => Controls_Manager::COLOR,
+			'selectors' => [
+				'h1:hover .utofc-toc-hash-tag,h2:hover .utofc-toc-hash-tag,h3:hover .utofc-toc-hash-tag,
+				h4:hover .utofc-toc-hash-tag,h5:hover .utofc-toc-hash-tag,h6:hover .utofc-toc-hash-tag' => 'color: {{VALUE}} !important;',
+			],
+		]
+	);
+	$this->end_controls_tab();
+	$this->end_controls_tabs();
+	$this->add_control(
+		'tct_Hashcopyhead',
+		[
+			'label' => esc_html__( 'Copied Text', 'useful-table-of-content' ),
+			'type' => Controls_Manager::HEADING,
+			'separator' => 'before',
+		]
+	);
+	$this->add_group_control(
+		Group_Control_Typography::get_type(),
+		[
+			'name' => 'HashcopyTypo',
+							'label' => esc_html__('Typography', 'useful-table-of-content'),
+			'scheme' => Typography::TYPOGRAPHY_3,
+			'selector' => '.utofc-copy-hash',
+		]
+	);
+	$this->add_control(
+		'Hashcopycolor',
+		[
+			'label' => esc_html__( 'Color', 'useful-table-of-content' ),
+			'type' => Controls_Manager::COLOR,
+			'selectors' => [
+				'.utofc-copy-hash' => 'color: {{VALUE}} !important;',
+			],
+		]
+	);
+	$this->end_controls_section();
+	
+			$this->start_controls_section(
+					'table_content_boxbg_styling',
+					[
+							'label' => esc_html__('Box', 'useful-table-of-content'),
+							'tab' => Controls_Manager::TAB_STYLE,
+					]
+			);
+			$this->add_responsive_control(
 		'boxPadding',
 		[
 			'label'      => esc_html__( 'Padding', 'useful-table-of-content' ),
@@ -1412,8 +1579,7 @@ class UTOFC_Effective_widgets extends Widget_Base {
 	$this->end_controls_tabs();
 			$this->end_controls_section();
 }
-// It's elementor table of content. here should show only h1, h2, h3, h4, h5, h6 and p tag's conent but why i can see others content? please fixed the problem
-	protected function render() {
+protected function render() {
 	$settings = $this->get_settings_for_display();
 	$uid_tblcontent=uniqid("utofc-tbl");
 	$Style = (!empty($settings["Style"])) ? $settings["Style"] : 'none';
@@ -1428,7 +1594,12 @@ class UTOFC_Effective_widgets extends Widget_Base {
 	$option['tocSelector'] = '.utofc-toc';
 	$option['contentSelector'] = (!empty($settings["contentSelector"])) ? $settings["contentSelector"] : '.elementor-page';
 	$option['headingSelector']= (is_array($settings["selectorHeading"])) ? implode(',', $settings["selectorHeading"]) : $settings["selectorHeading"];
+	
+	if(!empty($settings['hashtag']) && $settings['hashtag']=='yes'){
+		$option['hashtagtext']= !empty($settings["hashtagtext"]) ? $settings["hashtagtext"] : '#';
+	}
 
+	$option['headingsOffset'] = (!empty($settings['headingsOffset']['size'])) ? $settings['headingsOffset']['size'] : 1;
 	$option['scrollSmooth'] = (!empty($settings['smoothScroll'])) ? true : false;
 	$option['scrollSmoothDuration'] = (!empty($settings['smoothDuration']['size'])) ? (int)$settings['smoothDuration']['size'] : 420;
 	$option['scrollSmoothOffset'] = (!empty($settings['scrollOffset']['size'])) ? (int)$settings['scrollOffset']['size'] : 0;
@@ -1466,7 +1637,16 @@ class UTOFC_Effective_widgets extends Widget_Base {
 		 $PrefixIcon = ob_get_contents();
 		ob_end_clean();						
 	}
-		$output = '<div class="utofc-table-content utofc-widget-'.esc_attr($uid_tblcontent).' table-'.esc_attr($Style).'" data-settings="'.htmlspecialchars(json_encode($option), ENT_QUOTES, 'UTF-8').'" >';
+	$hashtag = isset($settings['hashtag']) ? $settings['hashtag'] : 'no';
+	$hashtaghover = isset($settings['hashtaghover']) ? $settings['hashtaghover'] : 'yes';
+	$hashtagclass=$hashtaghoverclass='';
+	if(isset($hashtag) && $hashtag=='yes'){
+		$hashtagclass='utofc-toc-hash-tag';
+		if(isset($hashtaghover) && $hashtaghover=='yes'){
+			$hashtaghoverclass='utofc-toc-hash-tag-hover';
+		}
+	}
+		$output = '<div class="utofc-table-content '.esc_attr($hashtagclass).' '.esc_attr($hashtaghoverclass).' utofc-widget-'.esc_attr($uid_tblcontent).' table-'.esc_attr($Style).'" data-settings="'.htmlspecialchars(json_encode($option), ENT_QUOTES, 'UTF-8').'" >';
 		$lz2 = function_exists('utofc_has_lazyload') ? sk_bg_lazyLoad($settings['boxBg_image'],$settings['boxBgHover_image']) : '';
 		$output .= '<div class="utofc-toc-wrap '.esc_attr($toggleClass).$toggleActive.' '.esc_attr($lz2).'" '.$toggleAttr.' >';
 					if((!empty($settings['showText']) && $settings['showText']=='yes') && !empty($settings['contentText']) ) {
@@ -1478,20 +1658,18 @@ class UTOFC_Effective_widgets extends Widget_Base {
 				
 				$lz1 = function_exists('utofc_has_lazyload') ? sk_bg_lazyLoad($settings['TextBg_image'],$settings['TextBgHover_image']) : '';
 				$output .= '<div class="utofc-toc-heading '.esc_attr($lz1).'"><span class="table-prefix-icon">'. $Icon .'<span>'. $settings['contentText'] .$table_desc.'</span></span>';
-				if(!empty($ToggleIcon) && $ToggleIcon=='yes'){
+					if(!empty($ToggleIcon) && $ToggleIcon=='yes'){
 						if((!empty($settings["DefaultToggle"]) && $settings["DefaultToggle"]=='yes')){
 						$output .= '<span class="table-toggle-icon">'.$openIcon.'</span>';
 						}else{
 							$output .= '<span class="table-toggle-icon">'.$closeIcon.'</span>';
 						}
 					}
-					$output .= '</div>';
+				$output .= '</div>';
 				}
-				$output .= 'Ferdaus sk01';
 				$output .= '<div class="utofc-toc toc"></div>';
 		$output .= '</div>';
 			$output .= '</div>';
 			echo $output; 
 	}
-
 }
